@@ -1,3 +1,6 @@
+
+
+
 const plantDetails = () => {
     fetch("https://openapi.programming-hero.com/api/categories")
       .then((res) => res.json())
@@ -12,17 +15,82 @@ const plantDetails = () => {
       .then((data) => displayLevelcard(data.plants));
   };
   
-  // {
-        //     "id": 3,
-        //     "image": "https://i.ibb.co.com/xt98PwZq/jackfruit-min.jpg",
-        //     "name": "Jackfruit Tree",
-        //     "description": "A large tropical tree that bears the world’s biggest fruit, the jackfruit. Its sweet and aromatic flesh is both nutritious and filling, and the tree itself provides generous shade.",
-        //     "category": "Fruit Tree",
-        //     "price": 800
-        // }
+ const cardDetails = async (id) => {
+  const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  displayModalDetails (data.plants);
+ };
+//  modal create 
+  const displayModalDetails = (modalDetails) => {
+    console.log(modalDetails);
+    const modalbox = document.getElementById("modals");
+    modalbox.innerHTML = `
+    <h2 class=" font-bold"> ${modalDetails.name} </h2>
+    <img class="w-[100%] h-48 object-cover rounded-md" src="${modalDetails.image}" alt="">
+  <p class="text-sm text-gray-500"><span class="font-semibold text-black">Category:</span> ${modalDetails.category}</p>
+
+    <p class="text-sm text-gray-500"> <span class="font-semibold text-black">Price:</span> ${modalDetails.price}</p>
+    <p class="text-sm text-gray-500"><span class="font-semibold text-black">Description:</span>${modalDetails.description}</p>
+    
+    
+    `;
+    document.getElementById("my_modal_5").showModal();
+  };
+//  all plants section 
+  const allTree = () => {
+    fetch("https://openapi.programming-hero.com/api/plants")
+    .then(res => res.json())
+    .then(data => defultcard(data.plants));
+
+  };
+  allTree();
+ 
+  const defultcard = () =>{
+    
+  }
+
+let cart =[];
+
+function showCardDisplay(){
+  const cartList = document.getElementById("cardList");
+  const totalMoney = document.getElementById("total-money");
+  cartList.innerHTML = "";
+  let total = 0;
+  cart.forEach((num, indx) =>{
+    total += num.price;
+    const div = createElement("div");
+    div.className = "flex items-center justify-between bg-green-100 rounded py-2 px-3";
+    div.innerHTML=`
+    <div>
+    <span>${num.name}</span>
+    <span class="flex items-center gap-2">
+      ৳${num.price}
+      </span>
+    </div>
+      <button class="text-red-500 font-bold text-lg remove-cart-btn" data-idx="${indx}">❌</button>
+    
+    `;
+    cartList.appendChild(div);
+  });
+  totalMoney.textContent = total;
+
+  document.querySelectorAll('.remove-cart-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const indx = parseInt(this.getAttribute('data-idx'));
+      cart.splice(indx, 1);
+      showCardDisplay();
+    });
+  });
+}
+
+
+
+
+
 
   const displayLevelcard = (cards) => {
-    console.log(cards);
+    console.log('hi:', cards);
     const cardContainer = document.getElementById("card-container")
     cardContainer.innerHTML = "";
 
@@ -35,7 +103,7 @@ const plantDetails = () => {
     <div class="card bg-white ">
     <div>
         <figure class=" p-4">
-            <img class="w-[100%] h-48 object-cover rounded-md" 
+            <img class=" h-48 object-cover rounded-md" 
               src="${card.image}"
               alt="Shoes"
               class="rounded-xl" />
@@ -48,8 +116,9 @@ const plantDetails = () => {
              <div class=" font-semibold"> <p>${card.price}</p></div>
             </div>
             <div class="card-actions">
-              <button class="btn btn-primary w-full rounded-full">Add to Card</button>
-            </div>
+              <button onclick="cardDetails(${card.id})" class="btn btn-primary w-full rounded-full ">Add to Card</button>
+            
+              </div>
           
         </div>
     </div>
@@ -73,7 +142,7 @@ const plantDetails = () => {
       const btnDiv = document.createElement("div");
       btnDiv.innerHTML = `
       
-      <button onclick="loadLevelCard('${category.id}')" class="btn btn-soft btn-accent">${category.category_name}</button>
+      <button onclick="loadLevelCard('${category.id}')" class="btn btn-soft btn-accent w-[150px] bg-[#dcfce7]  hover:bg-blue-300 ">${category.category_name}</button>
       
       
       `;
