@@ -1,6 +1,4 @@
 
-
-
 const plantDetails = () => {
     fetch("https://openapi.programming-hero.com/api/categories")
       .then((res) => res.json())
@@ -33,7 +31,6 @@ const plantDetails = () => {
     <p class="text-sm text-gray-500"> <span class="font-semibold text-black">Price:</span> ${modalDetails.price}</p>
     <p class="text-sm text-gray-500"><span class="font-semibold text-black">Description:</span>${modalDetails.description}</p>
     
-    
     `;
     document.getElementById("my_modal_5").showModal();
   };
@@ -48,8 +45,7 @@ const plantDetails = () => {
  
   const defultcard = () =>{
     
-
-    
+ 
   }
 
 let cart =[];
@@ -85,11 +81,6 @@ function showCardDisplay(){
     });
   });
 }
-
-
-
-
-
 
   const displayLevelcard = (cards) => {
     console.log('hi:', cards);
@@ -150,9 +141,5 @@ function showCardDisplay(){
       `;
       leftSide.append(btnDiv);
     }
-  
-    
   };
-  
- 
   plantDetails();
