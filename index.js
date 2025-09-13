@@ -48,6 +48,8 @@ const plantDetails = () => {
  
   const defultcard = () =>{
     
+
+    
   }
 
 let cart =[];
@@ -103,7 +105,7 @@ function showCardDisplay(){
     <div class="card bg-white ">
     <div>
         <figure class=" p-4">
-            <img class=" h-48 object-cover rounded-md" 
+            <img class="w-[100%] h-48 object-cover rounded-md" 
               src="${card.image}"
               alt="Shoes"
               class="rounded-xl" />
@@ -113,7 +115,7 @@ function showCardDisplay(){
             <p class="text-[12px]">${card.description} </p>
             <div class=" flex justify-between">
               <h1 class=" text-[14px] px-2 py-1 rounded-2xl text-[#15803D] bg-[#DCFCE7] ">${card.category}</h1>
-             <div class=" font-semibold"> <p>${card.price}</p></div>
+             <div class=" font-semibold"> <p class="font-semibold">৳${card.price}</p></div>
             </div>
             <div class="card-actions">
               <button onclick="cardDetails(${card.id})" class="btn btn-primary w-full rounded-full ">Add to Card</button>
@@ -142,18 +144,14 @@ function showCardDisplay(){
       const btnDiv = document.createElement("div");
       btnDiv.innerHTML = `
       
-      <button onclick="loadLevelCard('${category.id}')" class="btn btn-soft btn-accent w-[150px] bg-[#dcfce7]  hover:bg-blue-300 ">${category.category_name}</button>
+      <button onclick="loadLevelCard('${category.id}')" class="btn btn-soft btn-accent w-[150px] bg-[#dcfce7]  hover:bg-blue-500 hover:border-b-4 cursor-pointer ">${category.category_name}</button>
       
       
       `;
       leftSide.append(btnDiv);
     }
   
-    //     const url = "https://openapi.programming-hero.com/api/categories";
-    //     fetch(url)
-    //     .then(res=>res.json())
-    //     .then(json => console.log(json));
-    // }
+    
   };
   
  
